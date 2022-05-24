@@ -2,10 +2,8 @@ import React from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './css/App.css'
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import AppRoutes from './AppRoutes'
 import Logo from './img/logo.png'
-import Login from './components/login.component'
-import SignUp from './components/signup.component'
-import Forgot from './components/forgot.component'
 function App() {
   return (
     <Router>
@@ -33,12 +31,7 @@ function App() {
         </nav>
         <div className="auth-wrapper">
           <div className="auth-inner">
-            <Routes>
-              <Route exact path="/" element={<Login />} />
-              <Route path="/sign-in" element={<Login />} />
-              <Route path="/sign-up" element={<SignUp />} />
-              <Route path="/forgot" element={<Forgot />} />
-            </Routes>
+           <AppRoutes/>
           </div>
         </div>
       </div>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
   
-    const Login = () => {
+    const Home = () => {
 
       const [idtm, setIdtm] = useState("")
       const [password, setPassword] = useState("")
@@ -61,5 +61,5 @@ import React, { useState } from 'react'
     )
   }
 
-  export default Login
+  export default Home
 

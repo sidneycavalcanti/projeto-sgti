@@ -2,20 +2,16 @@ import React, { useState } from 'react'
 
 const Signup = () => {
 
+  const [nome, setNome] = useState("");
+  const [guerra, setGuerra] = useState("");
+  const [idtm, setIdtm] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   function cadastrarUsuario(e) {
-    e.perventDefault()
-    console.log('Cadastro finalizado')
+    e.preventDefault()
+    console.log('Cadastro finalizado', {nome, guerra, idtm, email, password})
   } 
-    const [nome, setNome] = useState("");
-    const [guerra, setGuerra] = useState("");
-    const [idtm, setIdtm] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-
-
-
-
- 
     return (
       <form onSubmit={cadastrarUsuario}>
         <h3>Inscreva-se</h3>
@@ -28,19 +24,19 @@ const Signup = () => {
             className="form-control"
             placeholder="Nome completo"
             value={nome}
-            onChange={(e) => setGuerra(e.target.value)}
+            onChange={(e) => setNome(e.target.value)}
           />
         </div>
         <div className="mb-3">
           <label>Nome de guerra</label>
           <input 
-          id="nome"
-          name="nome"
+          id="guerra"
+          name="guerra"
           type="text" 
           className="form-control" 
           placeholder="Nome de guerra" 
           value={guerra}
-          onChange={(e) => setNome(e.target.value)}
+          onChange={(e) => setGuerra(e.target.value)}
           />
         </div>
         <div className="mb-3">
@@ -81,7 +77,7 @@ const Signup = () => {
         </div>
         <div className="d-grid">
           <button type="submit" className="btn btn-primary">
-            Inscreva-se
+            Cadastrar
           </button>
         </div>
         <p className="forgot-password text-right">
