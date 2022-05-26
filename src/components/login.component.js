@@ -1,18 +1,24 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import { AuthContext } from '../contexts/auth'
   
-    const Login = () => {
+    const LoginPage = () => {
+
+     const { authenticated, login } = useContext (AuthContext);
 
       const [idtm, setIdtm] = useState("")
       const [password, setPassword] = useState("")
       
+      // enviar dados do usuario para logar no sistema
       const logar = (e) => {
         e.preventDefault();
-      
         console.log("submit", {idtm, password});
+
+       login(idtm, password); // interacao com o meu contexto / api
       };
     return (
       <form onSubmit={logar}>
         <h3>Entrar</h3>
+       <p>{String(authenticated)}</p>
         <div className="mb-3">
           <label htmlFor='Identidade'>Identidade militar</label>
           <input
@@ -61,5 +67,5 @@ import React, { useState } from 'react'
     )
   }
 
-  export default Login
+  export default LoginPage
 

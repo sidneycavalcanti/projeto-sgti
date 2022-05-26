@@ -1,10 +1,14 @@
 import React from 'react'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 import './css/App.css'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
 import AppRoutes from './AppRoutes'
 import Logo from './img/logo.png'
+import { AuthProvicer } from './contexts/auth';
+import { useState } from 'react'
+
 function App() {
+
   return (
     <Router>
       <div className="App">
@@ -31,7 +35,9 @@ function App() {
         </nav>
         <div className="auth-wrapper">
           <div className="auth-inner">
-           <AppRoutes/>
+            <AuthProvicer>
+              <AppRoutes/>
+            </AuthProvicer>
           </div>
         </div>
       </div>
