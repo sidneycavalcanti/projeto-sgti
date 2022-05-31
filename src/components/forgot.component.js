@@ -13,38 +13,47 @@ const Forgot = () => {
   };
 
     return (
-      <form onSubmit={recuperar}>
-        <h3>Recuperar acesso</h3>
-        <div className="mb-3">
-          <label>Identidade militar</label>
-          <input
-            id="idtm"
-            name="idtm"
-            type="number"
-            className="form-control"
-            placeholder="Digite sua identidade"
-            value={idtm}
-            onChange = {(e) => setIdtm(e.target.value)}
-          />
-        </div>
-        <div className="mb-3">
-          <label>E-mail</label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            className="form-control"
-            placeholder="E-mail"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
-            Enviar
-          </button>
-        </div>
-      </form>
+      <div className="auth-wrapper">
+      <div className="auth-inner"> 
+          <form onSubmit={recuperar}>
+            <h3>Recuperar acesso</h3>
+            <div className="mb-3">
+              <label>Identidade militar</label>
+              <input
+                id="idtm"
+                name="idtm"
+                type="number"
+                className="form-control"
+                placeholder="Digite sua identidade"
+                value={idtm}
+                onChange = {(e) => setIdtm(e.target.value)}
+              />
+            </div>
+            <div className="mb-3">
+              <label>E-mail</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                className="form-control"
+                placeholder="E-mail"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+            <div className="d-grid">
+              <button type="submit" className="btn btn-primary">
+                Enviar
+              </button>
+            </div>
+          </form>
+          <p className="forgot-password text-right">
+         <br></br>
+                   <a href="/">Voltar</a>
+          </p>
+      </div>
+      </div>
+      
     )
 }
 export default Forgot

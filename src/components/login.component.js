@@ -1,9 +1,11 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../contexts/auth'
+import Logo from '../img/logo.png'
+import { BrowserRouter as Router, Link } from 'react-router-dom'
   
     const LoginPage = () => {
 
-     const { authenticated, login } = useContext (AuthContext);
+     const { login } = useContext (AuthContext);
 
       const [idtm, setIdtm] = useState("")
       const [password, setPassword] = useState("")
@@ -16,9 +18,20 @@ import { AuthContext } from '../contexts/auth'
        login(idtm, password); // interacao com o meu contexto / api
       };
     return (
+      <div className="App">
+        
+        
+        <div className="auth-wrapper">
+          <div className="auth-inner">  
       <form onSubmit={logar}>
-        <h3>Entrar</h3>
-       <p>{String(authenticated)}</p>
+         <div class="col-md-12 text-center">
+          <Link className="" to={'/sign-in'}>
+            <img src={Logo} className="logo" width="30%" height="50%" display="" class="" alt=""/>
+          </Link>
+          </div>
+          <br></br>
+        <h1>SGTI</h1>
+
         <div className="mb-3">
           <label htmlFor='Identidade'>Identidade militar</label>
           <input
@@ -61,9 +74,17 @@ import { AuthContext } from '../contexts/auth'
           </button>
         </div>
         <p className="forgot-password text-right">
-          Esqueceu a <a href="/forgot">senha?</a>
+          Esqueceu a senha?<br></br> 
+          <a href="/forgot">Recuperar senha</a>
+        </p>
+        <p className="forgot-password text-right">
+          Ainda nao possui cadastro?<br></br>
+                   <a href="/sign-up">Inscreva-se!</a>
         </p>
       </form>
+      </div>
+        </div>
+      </div>
     )
   }
 
