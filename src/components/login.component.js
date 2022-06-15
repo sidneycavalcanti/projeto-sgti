@@ -1,7 +1,9 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../contexts/auth'
 import Logo from '../img/logo.png'
-import { BrowserRouter as Router, Link } from 'react-router-dom'
+import { BrowserRouter  as router, Link } from 'react-router-dom'
+//import * as yup from "yup"; // validacao no react
+//import Axios from "axios";
   
     const LoginPage = () => {
 
@@ -17,13 +19,33 @@ import { BrowserRouter as Router, Link } from 'react-router-dom'
 
        login(idtm, password); // interacao com o meu contexto / api
       };
+      
+      /*
+      const validationLogin = yup.object().shape({
+        idtm: yup
+        .number()
+        .number()
+        .required("Este campo é obrigatorio"),
+        password: yup
+        .string()
+        .min(8, "A senha deve ter 8 caracteres")
+        .required("Este campo é obrigatorio")
+        
+      })
+      */
+
+     // funcao para pegar informacoes do html atrves do botao 
+     //const handleClickButton = () =>{
+     //  console.log(idtm, password)
+     //}
+      
     return (
       <div className="App">
         
         
         <div className="auth-wrapper">
           <div className="auth-inner">  
-      <form onSubmit={logar}>
+      <form onSubmit={logar} /*validationSchema={validationLogin} */>
          <div class="col-md-12 text-center">
           <Link className="" to={'/sign-in'}>
             <img src={Logo} className="logo" width="30%" height="50%" display="" class="" alt=""/>
@@ -69,7 +91,7 @@ import { BrowserRouter as Router, Link } from 'react-router-dom'
           </div>
         </div>
         <div className="d-grid">
-          <button type="submit" className="btn btn-primary">
+          <button /*onClick={()=> handleClickButton()}*/ type="submit" className="btn btn-primary">
             Enviar
           </button>
         </div>

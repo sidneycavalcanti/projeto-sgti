@@ -1,17 +1,62 @@
 import React, { useState } from 'react'
 
+//responsavel pelas requisicoes 
+import axios from "axios";
+
+
+
 const Signup = () => {
 
+  //metodo 1
+  // todas as variaves em um unico objeto 
+  /*const [values, setValues] = useState();
+
+  //funcao para pegar todos os valores  em um unico objeto
+    const handleChangeValues = value => {
+      setValues(prevValue=>({
+        ...prevValue,
+        [value.target.nome]: value.target.value,
+      }))
+    };
+
+    const cad = () => {
+      Axios.post("http://localhost:3001/register", {
+        nome: values.nome,
+        guerra: values.guerra,
+        idtm: values.idtm,
+        email: values.email,
+        password: values.password
+      }).then((response)=>{
+        console.log(response);
+      });
+    } */
+    //////////////////////////////////////////////////////
+
+  //metodo 2
+  //cada variavel para cada objeto
   const [nome, setNome] = useState("");
   const [guerra, setGuerra] = useState("");
   const [idtm, setIdtm] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function cadastrarUsuario(e) {
+  const cadastrarUsuario =  (e) => {
     e.preventDefault()
-    console.log('Cadastro finalizado', {nome, guerra, idtm, email, password})
-  } 
+    axios
+    .post("http://localhost:5050/usuarios", 
+    {
+      nome,
+      guerra,
+      idtm,
+      email,
+      password
+    })
+    .then((response)=>{console.log(response);});
+   //console.log('Cadastro finalizado', cadastrarUsuario);
+  };
+  /////////////////////////////////////////////////////////
+ 
+  
     return (
     <div className="auth-wrapper">
       <div className="auth-inner">   
@@ -25,11 +70,15 @@ const Signup = () => {
               type="text"
               className="form-control"
               placeholder="Nome completo"
-              value={nome}
+              //metodo 1
+              //onChange={handleChangeValues}
+              // metodo 2 
               onChange={(e) => setNome(e.target.value)}
+              
             />
           </div>
           <div className="mb-3">
+            
             <label>Nome de guerra</label>
             <input 
             id="guerra"
@@ -38,6 +87,9 @@ const Signup = () => {
             className="form-control" 
             placeholder="Nome de guerra" 
             value={guerra}
+            //metodo 1
+            //onChange={handleChangeValues}
+            // metodo 2 
             onChange={(e) => setGuerra(e.target.value)}
             />
           </div>
@@ -50,6 +102,9 @@ const Signup = () => {
             className="form-control"
             placeholder="Digite sua identidade"
             value={idtm}
+            //metodo 1
+            //onChange={handleChangeValues}
+            // metodo 2 
             onChange={(e) => setIdtm(e.target.value)}
             />
           </div>
@@ -60,9 +115,12 @@ const Signup = () => {
               id="email"
               name="email"
               type="email"
-              className="form-control"
+              class="form-control"
               placeholder="Digite seu email"
               value={email}
+              //metodo 1
+              //onChange={handleChangeValues}
+              // metodo 2 
               onChange={(e)=>setEmail(e.target.value)}
             />
           </div>
@@ -75,6 +133,9 @@ const Signup = () => {
               className="form-control"
               placeholder="Digite sua senha"
               value={password}
+              //metodo 1
+              //onChange={handleChangeValues}
+              // metodo 2 
               onChange={(e)=>setPassword(e.target.value)}
             />
           </div>
