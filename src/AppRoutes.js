@@ -4,8 +4,9 @@ import SignUp from './components/signup.component';
 import Forgot from './components/forgot.component';
 import Home from './components/home.component';
 import React, { useContext } from 'react';
+
 // importando o auth.js onde tem as funcoes de login e etc
-import { AuthContext } from './contexts/auth';
+import { AuthContext, AuthProvicer } from './contexts/auth';
 
 //import HomePage from './components/home.component'
 
@@ -24,8 +25,8 @@ const AppRoutes = () => {
                 }
                 // se estiver autenticado ele manda para children
                 return children;
-        }
- //<AuthContext.Provider value={{authenticated: user, login }}> </AuthContext.Provider>
+        };
+  // <AuthContext.Provider value={{authenticated: user, login }}> </AuthContext.Provider>
     return (
     <Routes>
             <Route exact path="/" element={<Login />} />
@@ -33,7 +34,7 @@ const AppRoutes = () => {
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/forgot" element={<Forgot />} />
             {/*Tudo que estiver com private vai verificar se esta autenticado*/}
-            <Route exct path="/home-page" element={<Private><Home /></Private>} />
+            <Route exact path="/home-page" element={<Private><Home /></Private>} />
     </Routes>)
    
 }

@@ -10,13 +10,10 @@ import { AuthProvicer } from './contexts/auth';
 function App() {
 
   return (
-    
-     
     <Router>
             <AuthProvicer>
               <AppRoutes/>
             </AuthProvicer>
-        
     </Router>
   )
 }

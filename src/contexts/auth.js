@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 
 import {api, creatSession} from '../services/api';
 
+
 export const AuthContext = createContext();
 
 export const AuthProvicer = ({children}) => {
-    //estancia da funcao
+
+    //estancia da funcao useNavigate do react-router-dom;
     const navigate  = useNavigate();
     const [user, setUser] = useState(null);
     //verificar se tem dados no localStore antes de abrir o login
@@ -26,10 +28,13 @@ export const AuthProvicer = ({children}) => {
         setLoading(false);
     },[])
 
-    const login = async (idtm, password) => {
-        const response = await creatSession(idtm, password);
-        console.log("login", response.data);
+    
 
+    const login = async (idtm, password) => {
+      
+        const response = await creatSession(idtm, password);
+        console.log("login", response.data.user);
+       
         //armazenar dado no local storage para usar quando necessario
         const loggerUser = response.data.user;
         const token = response.data.token;
@@ -37,10 +42,10 @@ export const AuthProvicer = ({children}) => {
         localStorage.setItem("user", JSON.stringify(loggerUser))
         localStorage.setItem("token", token)
 
-        api.defaults.headers.Authorization = `Bearer ${token}`;
+        //api.defaults.headers.Authorization = `Bearer ${token}`;
 
         setUser(loggerUser);
-        navigate("/");
+        navigate("/home-page");
 
         //condicional para entrar no home
         /*if(password === "1010") {
@@ -65,11 +70,13 @@ export const AuthProvicer = ({children}) => {
         //voltar para tela de login
         navigate("/");
     };
+    //limpar loca storage
+    //logout();
 
     return(
         // no campo value consigo exporte as funcoes para quem quiser consumir 
         <AuthContext.Provider 
-        value={{authenticated: !!user, user, loading, login, logout }}>
+        value={{ authenticated: !!user, user, loading, login, logout }}>
             {children}
         </AuthContext.Provider>
     )

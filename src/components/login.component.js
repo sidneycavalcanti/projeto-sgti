@@ -1,37 +1,44 @@
 import React, { useState, useContext } from 'react'
 import { AuthContext } from '../contexts/auth'
 import Logo from '../img/logo.png'
-import { BrowserRouter  as router, Link } from 'react-router-dom'
+import { BrowserRouter  as Router, Link } from 'react-router-dom';
 //import * as yup from "yup"; // validacao no react
-//import Axios from "axios";
+//import axios from "axios";
   
     const LoginPage = () => {
 
-     const { login } = useContext (AuthContext);
+     const { authenticated, login } = useContext (AuthContext);
 
       const [idtm, setIdtm] = useState("")
       const [password, setPassword] = useState("")
       
-      // enviar dados do usuario para logar no sistema
+      //enviar dados para logar no sistema
       const logar = (e) => {
+        e.preventDefault()
+       // console.log("submit", {idtm, password});
+        /*
+        axios
+        .post("http://localhost:5050/login", 
+        {
+          idtm,
+          password
+        }).then((response)=>{console.log(response);});
+        */
+        login(idtm, password);  // interacao com o meu contexto / api
+       
+    
+      };
+
+
+      // enviar dados do usuario para logar no sistema
+      /*const logar = (e) => {
+        
         e.preventDefault();
         console.log("submit", {idtm, password});
 
        login(idtm, password); // interacao com o meu contexto / api
       };
       
-      /*
-      const validationLogin = yup.object().shape({
-        idtm: yup
-        .number()
-        .number()
-        .required("Este campo é obrigatorio"),
-        password: yup
-        .string()
-        .min(8, "A senha deve ter 8 caracteres")
-        .required("Este campo é obrigatorio")
-        
-      })
       */
 
      // funcao para pegar informacoes do html atrves do botao 
@@ -40,9 +47,7 @@ import { BrowserRouter  as router, Link } from 'react-router-dom'
      //}
       
     return (
-      <div className="App">
-        
-        
+      <div className="App">  
         <div className="auth-wrapper">
           <div className="auth-inner">  
       <form onSubmit={logar} /*validationSchema={validationLogin} */>
@@ -57,6 +62,7 @@ import { BrowserRouter  as router, Link } from 'react-router-dom'
         <div className="mb-3">
           <label htmlFor='Identidade'>Identidade militar</label>
           <input
+            required
             id="idtm"
             name="idtm"
             type="number"
@@ -69,6 +75,7 @@ import { BrowserRouter  as router, Link } from 'react-router-dom'
         <div className="mb-3">
           <label>Senha</label>
           <input
+            required
             id="password"
             name="password"
             type="password"
