@@ -4,12 +4,20 @@ import { BrowserRouter as Router, Link } from 'react-router-dom'
 import { AuthContext } from '../contexts/auth'
 import Logo from '../img/logo.png';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Modal, Form, Container, Row, Col } from 'react-bootstrap';
+import { Button, Modal, Form, Container, Row, Col, Dropdown } from 'react-bootstrap';
+import axios from 'axios';
 
 
 
 
     const HomePage = () => {
+
+
+      var teste = localStorage.getItem("user");
+    
+
+      const [cat, setCat] = useState("");
+      const [desc, setDesc] = useState("");
 
       // modal exemplo 
       const [show1, setShow1] = useState(false);
@@ -31,6 +39,23 @@ import { Button, Modal, Form, Container, Row, Col } from 'react-bootstrap';
         logout();
       };
 
+      const cadastrarChamado =  (e) => {
+        e.preventDefault()
+        axios
+        .post("http://localhost:5050/chamados", 
+        {
+         
+        }).then((response) => { alert(response.data.alert);
+          //navigate("/sign-in")
+          console.log(response)
+    
+        }).catch(()=>{
+          alert("Usuario ja possui cadastro!")
+        })
+        //.then((response)=>{console.log(response);});
+       //console.log('Cadastro finalizado', cadastrarUsuario);
+        
+      };
       // tornar algo visivel e nao visivel 
     /* 
     const [isModalVisible1, setisModalVisible1] = useState(false)
@@ -88,29 +113,43 @@ import { Button, Modal, Form, Container, Row, Col } from 'react-bootstrap';
           </div> 
              {/* Modal de abertura de chamado */}
             <Modal show={show1} onHide={Esconder1}>
-              <Modal.Header closeButton>
-                <Modal.Title>ABRIR CHAMADO</Modal.Title>
-              </Modal.Header>
+            <Modal.Header closeButton>
+              <Modal.Title>ABRIR CHAMADO</Modal.Title>
+            </Modal.Header>
               <Modal.Body>
-              <Form>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control
-                type="email"
-                placeholder="name@example.com"
-                autoFocus
-              />
-            </Form.Group>
-            <Form.Group
-              className="mb-3"
-              controlId="exampleForm.ControlTextarea1"
-            >
-              <Form.Label>Example textarea</Form.Label>
-              <Form.Control as="textarea" rows={3} />
-            </Form.Group>
-          </Form>
+                <Form.Group  onSubmit={cadastrarChamado}  >
+                  <Form.Label>Categoria</Form.Label>
+                  <Form.Control
+                   required
+                   id="cat"
+                   nome="cat"
+                   type="text"
+                   placeholder="Categoria"
+                   value={cat}
+                   autoFocus
+                   as="select"
+                   onChange={(e) => setCat(e.target.value)}
+                   >  
+                    <option  disabled></option>
+                    <option value="software">Software</option>
+                    <option value="hardware">Hardware</option>
+                    <option value="duvida">Duvida</option>
+                    <option value="sem">Sem Categoria difinida</option>
+                    
+                  </Form.Control>
+                  <br/>
+                  <Form.Label>Descrição</Form.Label>
+                  <Form.Control 
+                  required
+                  id="desc"
+                  nome="desc"
+                  type="text"
+                  value={desc}
+                  onChange={(e) => setDesc(e.target.value)}
+                  as="textarea" 
+                  rows={4} />
+                </Form.Group>
               </Modal.Body>
-              
               <Modal.Footer>
                 <Button variant="secondary" onClick={Esconder1}>
                   Close

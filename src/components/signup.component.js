@@ -66,7 +66,7 @@ const Signup = () => {
     
   };
   /////////////////////////////////////////////////////////
- 
+    
     return (
       
     <div className="auth-wrapper">
@@ -100,7 +100,7 @@ const Signup = () => {
                 type="text" 
                 value={grad} 
                 className="form-control" 
-                placeholder="Nome de guerra" 
+                placeholder="Graduacao" 
                 onChange={(e) => setGrad(e.target.value)}
               >
                 <option  disabled></option>
